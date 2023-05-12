@@ -30,15 +30,13 @@ exports.Registration = (req, res) => {
         let data = [req.body.role, req.body.name, req.body.email, md5(req.body.password), md5(req.body.confirm_password), req.body.mobile_no];
         sql.query(query, data, async (err, result, cache) => {
             if (err) {
+                console.log(err)
                 res.status(500)
                     .send({
                         success: false,
                         message: 'Internal server error..!',
                         data: err
                     });
-            }
-            if (cache.isCache == false) {
-                sql.flush();
             }
             if (result.insertId) {
                 resolve({ id: result.insertId });

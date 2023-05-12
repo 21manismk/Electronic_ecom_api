@@ -1,14 +1,16 @@
 var mysql = require('mysql');
     
-var con = mysql.createConnection({
+var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "admin@123",
+  password: "admin",
   database: 's3_ecom',
   insecureAuth : true
 });
 
-con.connect(function(err) {
+connection.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
 });
+
+module.exports = connection
