@@ -15,7 +15,7 @@ app.use('/images', express.static('images'));
 app.use(bodyParser.urlencoded({ extended: false }));
  
 app.use(bodyParser.json());
-app.use('/api/consumer', ApiRouter);
+app.use('/api/v1/s3/', ApiRouter);
   
 
 app.listen(port, () => {
