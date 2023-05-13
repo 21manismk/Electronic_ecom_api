@@ -1,16 +1,16 @@
 
 const sql = require('../config/conn');
 var validator = require('./../helper/validate');
-var consModel = require('../models/consModel');
+var commonModel = require('../models/commonModel');
 
 
 module.exports = {
 
-
     Signup: async (req, res) => {
-        let list = await consModel.CheckUniqueEmail(req);
+        console.log(req)
+        let list = await commonModel.CheckUniqueEmail(req);
         if (list.length === 0) {
-            let result = await consModel.Registration(req, res);
+            let result = await commonModel.Registration(req, res);
             if (result) {
                 res.status(200)
                     .send({
@@ -43,9 +43,8 @@ module.exports = {
             "message": "hihello"
         })
     },
-    detailsPost: async (req, res) => {
 
-    }
+    
 
 }
 

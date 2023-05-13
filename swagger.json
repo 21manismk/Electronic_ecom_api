@@ -85,6 +85,163 @@
                 }
             }
         },
+        "/v1/s3/getAppliances": {
+            "get": {
+                "summary": "Get all the Appliances",
+                "description": "Get all the Appliances",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation",
+                        "schema": {
+                            "$ref": "#/definitions/SucessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/s3/serviceRequest/{appliance_id}": {
+            "get": {
+                "summary": "Get Appliance Details",
+                "description": "Get Appliance Details",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "appliance_id",
+                        "in": "path",
+                        "description": "appliance id that needs to be take details",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation",
+                        "schema": {
+                            "$ref": "#/definitions/SucessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/s3/serviceRequest/": {
+            "post": {
+                "summary": "Create Service Request",
+                "description": "Create Service Request",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Service Request object",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "user_id":{
+                                    "type":"integer"
+                                },
+                                "tech_id":{
+                                    "type":"integer"
+                                },
+                                "service_id":{
+                                    "type":"integer",
+                                    "example":1
+                                },
+                                "brand": {
+                                    "type": "integer",
+                                    "example":1
+                                },
+                                "model_number": {
+                                    "type": "string"
+                                },
+                                "variants": {
+                                    "type": "string"
+                                },
+                                "warranty_status": {
+                                    "type": "string"
+                                },
+                                "warranty_limit": {
+                                    "type": "string"
+                                },
+                                "damage_id": {
+                                    "type": "integer",
+                                    "example":1
+                                },
+                                "damage_description": {
+                                    "type": "string"
+                                },
+                                "attachments": {
+                                    "type": "array",
+                                    "items":{
+                                    "type": "string",
+                                    "format": "int64",
+                                    "example": "image.jpg"
+                                    }
+                                },
+                                "tech_visit": {
+                                    "type": "string"
+                                },
+                                "slots": {
+                                    "type": "string"
+                                },
+                                "labour_fee": {
+                                    "type": "integer"
+                                }
+                            },
+                            "required": [
+                                "brand",
+                                "model_number",
+                                "variants",
+                                "warranty_status",
+                                "warranty_limit",
+                                "damage_id",
+                                "damage_description",
+                                "tech_visit",
+                                "slots",
+                                "labour_fee"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation",
+                        "schema": {
+                            "$ref": "#/definitions/SucessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/consumer/todos": {
             "get": {
                 "summary": "Get all the tasks",
