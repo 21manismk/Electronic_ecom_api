@@ -18,7 +18,7 @@
     "host": "localhost:3000",
     "basePath": "/api",
     "paths": {
-        "/consumer/signup": {
+        "/signup": {
             "post": {
                 "summary": "User Signup",
                 "description": "User Signup",
@@ -244,8 +244,8 @@
         },
         "/consumer/todos": {
             "get": {
-                "summary": "Get all the tasks",
-                "description": "Get all the tasks",
+                "summary": "User Login",
+                "description": "User Login",
                 "produces": [
                     "application/json"
                 ],
@@ -269,10 +269,10 @@
                 }
             }
         },
-        "/todo": {
+        "/forgotpassword": {
             "post": {
-                "summary": "Save the task",
-                "description": "Save the task",
+                "summary": "User forgotpassword",
+                "description": "User forgotpassword",
                 "produces": [
                     "application/json"
                 ],
@@ -283,112 +283,48 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "task object",
+                        "description": "signup object",
                         "required": true,
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "task": {
-                                    "type": "object",
-                                    "$ref": "#/definitions/Task"
+                                "role": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string",
+                                    "format": "email"
+                                },
+                                "password": {
+                                    "type": "string"
+                                },
+                                "confirm_password": {
+                                    "type": "string"
+                                },
+                                "mobile_no": {
+                                    "type": "integer",
+                                    "format": "number"
                                 }
-                            }
+                            },
+                            "required": [
+                                "name",
+                                "email",
+                                "role",
+                                "password",
+                                "confirm_password",
+                                "mobile_no"
+                            ]
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
+                        "description": "Successful Operation",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/todosResponse"
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid status value",
-                        "schema": {
-                            "$ref": "#/definitions/InvalidResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/todos/{id}": {
-            "put": {
-                "summary": "Update the tasks",
-                "description": "Update the tasks",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "task id that needs to be deleted",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "task object",
-                        "required": true,
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "task": {
-                                    "type": "object",
-                                    "$ref": "#/definitions/Task"
-                                }
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/todosResponse"
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid status value",
-                        "schema": {
-                            "$ref": "#/definitions/InvalidResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/todo/{id}": {
-            "delete": {
-                "summary": "Delete the task",
-                "description": "Delete the task",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "task id that needs to be deleted",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/todosResponse"
-                            }
+                            "$ref": "#/definitions/SucessResponse"
                         }
                     },
                     "400": {
@@ -400,6 +336,7 @@
                 }
             }
         }
+      
     },
     "definitions": {
         "SucessResponse": {

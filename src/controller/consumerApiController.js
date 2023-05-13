@@ -2,7 +2,6 @@ const moment = require('moment');
 const sql = require('../config/conn');
 const UserModel = require('../models/userModel');
 const CommonModel = require('../models/commonModel')
-const StorageController = require('./storageController')
 
 
 module.exports = {
@@ -80,39 +79,42 @@ module.exports = {
 
     insertServiceRequest: async (req, res) => {
         //const appliancesDetails = await CommonModel.getApplianceDetails(req, res);
-            let query = "insert into sr_details (user_id,tech_id,service_id,tech_visit,slots,damage_type,damage_description,brand_id,model_no,variants,warranty_status,warranty_limit,labour_fee) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            let data = [req.body.user_id,req.body.tech_id,req.body.service_id,req.body.tech_visit,req.body.slots,req.body.damage_id,req.body.damage_description,req.body.brand,req.body.model_number,req.body.variants,req.body.warranty_status,req.body.warranty_limit,req.body.labour_fee];
-            sql.query(query, data, async (err, result) => {
-                if (err) {
-                    res.status(500)
-                        .send({
-                            status: 500,
-                            message: 'Internal Server Error..!',
-                            data: []
-                        })
-                } else if (result.affectedRows > 0) {
-                    if(req.files){
-                        const resp = StorageController.UploadAttachments(req.files.attachments, result.insertId)
-                    } 
+        let query = "insert into sr_details (user_id,tech_id,service_id,tech_visit,slots,damage_type,damage_description,brand_id,model_no,variants,warranty_status,warranty_limit,labour_fee) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        let data = [req.body.user_id, req.body.tech_id, req.body.service_id, req.body.tech_visit, req.body.slots, req.body.damage_id, req.body.damage_description, req.body.brand, req.body.model_number, req.body.variants, req.body.warranty_status, req.body.warranty_limit, req.body.labour_fee];
+        sql.query(query, data, async (err, result) => {
+            if (err) {
+                res.status(500)
+                    .send({
+                        status: 500,
+                        message: 'Internal Server Error..!',
+                        data: []
+                    })
+            } else if (result.affectedRows > 0) {
+                if (req.files) {
+                    //const resp = StorageController.UploadAttachments(req.files.attachments, result.insertId)
+                   await CommonModel.uploadRequestAttachments(req, res, result.insertId)
+
                     res.status(200)
                         .send({
                             status: 200,
                             message: 'Service Request Created Successfully..!',
                             data: []
                         })
-                } else {
-                    res.status(200)
-                        .send({
-                            status: 200,
-                            message: 'Service Request Not Created..!',
-                            data: []
-                        })
                 }
 
-            });
-        
+            } else {
+                res.status(200)
+                    .send({
+                        status: 200,
+                        message: 'Service Request Not Created..!',
+                        data: []
+                    })
+            }
 
-       
+        });
+
+
+
 
     }
 }

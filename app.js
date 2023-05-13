@@ -7,10 +7,13 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 const fileUpload = require('express-fileupload');
 const cookieparser = require("cookie-parser");
-
+var corsOptions = {
+  origin: ["*",],
+  methods: ['GET','HEAD','PUT','PATCH','POST','DELETE'],
+};
 const app = express()
 const port = 3000
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieparser());
 app.use(fileUpload());
