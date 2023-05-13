@@ -1,9 +1,11 @@
 const express = require('express')
 var cors = require('cors');
 var bodyParser = require('body-parser');
+const swaggerDocument = require('./swagger.json');
 var ApiRouter = require('./src/routes/userRoute');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
+
 
 const app = express()
 const port = 3000
@@ -37,5 +39,5 @@ const specs = swaggerJsdoc(options);
 app.use(
   "/api-docs",
   swaggerUi.serve,
-  swaggerUi.setup(specs, { explorer: true })
+  swaggerUi.setup(swaggerDocument, { explorer: true })
 );

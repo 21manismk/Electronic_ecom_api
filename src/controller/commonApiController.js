@@ -9,7 +9,7 @@ module.exports = {
 
 Signup: async (req, res) => {
     let list = await consModel.CheckUniqueEmail(req);
-    if (list.length == 0) {
+    if (list.length === 0) {
         let result = await consModel.Registration(req, res);
         if (result) {
             res.send({
@@ -39,7 +39,7 @@ details: async (req,res)=>{
 res.send({
     "message":"hihello"
 })
-}
+},
 
 }
     
