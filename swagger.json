@@ -1,4 +1,3 @@
-
 {
     "swagger": "2.0",
     "info": {
@@ -13,16 +12,22 @@
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         }
     },
-    "schemes": ["http"],
+    "schemes": [
+        "http"
+    ],
     "host": "localhost:3000",
     "basePath": "/api",
-    "paths" : {
-        "/consumer/signup" : {
-            "post" : {
-                "summary" : "User Signup",
+    "paths": {
+        "/consumer/signup": {
+            "post": {
+                "summary": "User Signup",
                 "description": "User Signup",
-                "produces": ["application/json"],
-                "consumes": ["application/json"],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "in": "body",
@@ -52,20 +57,23 @@
                                     "type": "integer",
                                     "format": "number"
                                 }
-                                
                             },
-                            "required": ["name", "email", "role", "password", "confirm_password", "mobile_no"]
+                            "required": [
+                                "name",
+                                "email",
+                                "role",
+                                "password",
+                                "confirm_password",
+                                "mobile_no"
+                            ]
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
+                        "description": "Successful Operation",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/todosResponse"
-                            }
+                            "$ref": "#/definitions/SucessResponse"
                         }
                     },
                     "400": {
@@ -77,11 +85,13 @@
                 }
             }
         },
-        "/consumer/todos" : {
-            "get" : {
-                "summary" : "Get all the tasks",
+        "/consumer/todos": {
+            "get": {
+                "summary": "Get all the tasks",
                 "description": "Get all the tasks",
-                "produces": ["application/json"],
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [],
                 "responses": {
                     "200": {
@@ -102,12 +112,16 @@
                 }
             }
         },
-        "/todo" : {
-            "post" : {
-                "summary" : "Save the task",
+        "/todo": {
+            "post": {
+                "summary": "Save the task",
                 "description": "Save the task",
-                "produces": ["application/json"],
-                "consumes": ["application/json"],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "in": "body",
@@ -117,10 +131,10 @@
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "task" : {
+                                "task": {
                                     "type": "object",
                                     "$ref": "#/definitions/Task"
-                                } 
+                                }
                             }
                         }
                     }
@@ -144,11 +158,13 @@
                 }
             }
         },
-        "/todos/{id}" : {
-            "put" : {
-                "summary" : "Update the tasks",
+        "/todos/{id}": {
+            "put": {
+                "summary": "Update the tasks",
                 "description": "Update the tasks",
-                "produces": ["application/json"],
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -165,10 +181,10 @@
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "task" : {
+                                "task": {
                                     "type": "object",
                                     "$ref": "#/definitions/Task"
-                                } 
+                                }
                             }
                         }
                     }
@@ -192,11 +208,13 @@
                 }
             }
         },
-        "/todo/{id}" : {
-            "delete" : {
-                "summary" : "Delete the task",
+        "/todo/{id}": {
+            "delete": {
+                "summary": "Delete the task",
                 "description": "Delete the task",
-                "produces": ["application/json"],
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -225,22 +243,19 @@
                 }
             }
         }
-    }, 
+    },
     "definitions": {
-        "todosResponse": {
+        "SucessResponse": {
             "type": "object",
             "properties": {
-                "id": {
-                     "type": "integer"
-                },
-                "task": {
-                    "type": "string"
-                },
-                "assignee": {
-                    "type": "string"
-                },
                 "status": {
+                    "type": "integer"
+                },
+                "message": {
                     "type": "string"
+                },
+                "data": {
+                    "type": "array"
                 }
             }
         },
@@ -261,14 +276,16 @@
         "InvalidResponse": {
             "type": "object",
             "properties": {
-                "statusCode": {
-                    "type": "string"
+                "status": {
+                    "type": "integer"
                 },
                 "message": {
                     "type": "string"
+                },
+                "data": {
+                    "type": "array"
                 }
             }
-
         }
     }
 }

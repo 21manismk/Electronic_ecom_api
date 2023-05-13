@@ -39,7 +39,7 @@ exports.Registration = (req, res) => {
                     });
             }
             if (result.insertId) {
-                resolve({ id: result.insertId });
+                resolve([]);
             }
 
             else {
