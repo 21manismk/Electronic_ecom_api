@@ -6,8 +6,13 @@ var userApiController= require('../controller/consumerApiController');
 
 router.post('/signup',commonApiController.Signup);
 
-router.get('/details',commonApiController.details);
+router.post('/login',commonApiController.Login);
 
+router.post('/forgot_password',commonApiController.ForgotPassword);
+
+router.post('/otp_verify',commonApiController.OtpVerify);
+
+router.post('/change_password',commonApiController.ChangePassword);
 
 
 

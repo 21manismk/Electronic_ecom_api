@@ -3,7 +3,7 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "admin",
+  password: "admin@123",
   database: 's3_ecom',
   insecureAuth : true
 });
