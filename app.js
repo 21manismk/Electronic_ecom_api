@@ -5,14 +5,17 @@ const swaggerDocument = require('./swagger.json');
 var ApiRouter = require('./src/routes/userRoute');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
-
+const fileUpload = require('express-fileupload');
+const cookieparser = require("cookie-parser");
 
 const app = express()
 const port = 3000
 app.use(cors());
 app.use(express.json());
+app.use(cookieparser());
+app.use(fileUpload());
 app.use('/images', express.static('images'));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
  
 app.use(bodyParser.json());
 app.use('/api/v1/s3/', ApiRouter);
