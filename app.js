@@ -11,7 +11,7 @@ const app = express()
 const port = 3000
 app.use(cors());
 app.use(express.json());
-
+app.use('/images', express.static('images'));
 app.use(bodyParser.urlencoded({ extended: false }));
  
 app.use(bodyParser.json());
@@ -22,19 +22,6 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
-const options = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'Your API Name',
-      version: '1.0.0',
-      description: 'A short description of your API',
-    },
-  },
-  apis: ['./src/routes/*.js'], // Path to the API docs
-};
-
-const specs = swaggerJsdoc(options);
 
 app.use(
   "/api-docs",
